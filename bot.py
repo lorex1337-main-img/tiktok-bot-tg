@@ -8,10 +8,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text.strip()
 
     if "tiktok.com" not in text and "vm.tiktok.com" not in text:
-        await update.message.reply_text("❌ Это не ссылка на TikTok.")
+        await update.message.reply_text("❌ это не ссылка на TikTok.")
         return
 
-    await update.message.reply_text("⏳ Ищу видео через TikWM...")
+    await update.message.reply_text("⏳ ща бро сек...")
 
     try:
         # Запрос к TikWM API
@@ -20,7 +20,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         data = response.json()
 
         if data["code"] != 0:
-            await update.message.reply_text("❌ Видео не найдено или API недоступен.")
+            await update.message.reply_text("❌ видео не найдено или API недоступен.")
             return
 
         video_url = data["data"]["play"]  # Без водяного знака
@@ -30,7 +30,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_video(video=video_url, caption=title)
 
     except Exception as e:
-        await update.message.reply_text(f"⚠️ Ошибка при скачивании: {e}")
+        await update.message.reply_text(f"⚠️ ошибочка вышла: {e}")
 
 if __name__ == "__main__":
     print("🚀 Бот запускается...")
